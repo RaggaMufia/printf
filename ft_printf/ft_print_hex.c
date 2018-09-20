@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/15 12:13:36 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/15 12:45:37 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/15 12:20:02 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/18 14:03:03 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoa_base(int val, int base)
+int		ft_print_hex(const char *format)
 {
-	char	*str;
-	int		len;
-	long	nb;
-	int		sign;
+	t_printf	*print;
+    int			i;
 
-	nb = (val < 0) ? -(long)val : val;
-	sign = (val <0 && base == 10) ? -1 : 0;
-	len = (sign == -1) ? 2 : 1;
-	while ((nb /= base))
-		len++;
-	if (!(str = (char *)malloc(sizeof(char) * len)))
-		return (NULL);
-	while (len-- + sign)
+	i = 0;
+	print = (t_printf *)malloc(sizeof(t_printf));
+	print->nbr = 0;
+	while (format[i] == '%')
 	{
-		str[len] = (nb % base < 10) ? (nb % base + '0') : (nb % base + 'A' - 10);
-		nb /= base;
+		i++;
+		if (format[i] == 'x' || format[i] == 'X')
+		{
+			print->uns = va_arg(print->ap, unsigned int);
+			print->str = ft_itoa_base(print->uns, 16);
+			print->nbr = ft_strlen(ft_itoa(print->uns));
+			ft_putnbr(print->uns);
+		}
 	}
-	return (str);
+	return (print->nbr);
 }

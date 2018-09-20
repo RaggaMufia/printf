@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 17:17:04 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/07 17:18:01 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/20 12:48:19 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/20 12:49:21 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_strlen(char *str)
+int		ft_strlen(const char *str)
 {
 	int		i;
 

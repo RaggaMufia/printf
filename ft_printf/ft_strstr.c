@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_address.c                                 :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/20 13:13:01 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/20 15:18:43 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/17 12:21:26 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/17 12:26:08 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_print_address(const char *format)
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	t_printf	*print;
+	int	i;
+	int	j;
+	int	nlen;
 
-	if (!(print = (t_printf *)malloc(sizeof(t_printf))))
-		return (0);
-	if (ft_strstr(format, "%p"))
+	i = 0;
+	j = 0;
+	nlen = ft_strlen(s2);
+	if (nlen == 0)
+		return ((char *)s1);
+	while (s1[i])
 	{
-		print->ptr = va_arg(print->ap, void *);
-		print->str = ft_itoa_base(ft_atoi(print->ptr), 16);
-		ft_putstr("0x77ffe");
-		ft_putstr(print->str);
-		print->nbr = ft_strlen(print->str);
+		while (s1[i + j] == s2[j])
+		{
+			if (j == nlen - 1)
+				return ((char *)s1 + i);
+			j++;
+		}
+		j = 0;
+		i++;
 	}
-	return (print->nbr);
+	return (0);
 }

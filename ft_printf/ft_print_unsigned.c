@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/15 12:13:36 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/15 12:45:37 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/15 12:26:15 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/18 14:03:39 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoa_base(int val, int base)
+int		ft_print_unsigned(const char *format)
 {
-	char	*str;
-	int		len;
-	long	nb;
-	int		sign;
+	int			i;
+	t_printf	*print;
 
-	nb = (val < 0) ? -(long)val : val;
-	sign = (val <0 && base == 10) ? -1 : 0;
-	len = (sign == -1) ? 2 : 1;
-	while ((nb /= base))
-		len++;
-	if (!(str = (char *)malloc(sizeof(char) * len)))
-		return (NULL);
-	while (len-- + sign)
+	i = 0;
+	print = (t_printf *)malloc(sizeof(t_printf));
+	print->nbr = 0;
+	while (format[i] == '%')
 	{
-		str[len] = (nb % base < 10) ? (nb % base + '0') : (nb % base + 'A' - 10);
-		nb /= base;
+		i++;
+		if (format[i] == 'u' || format[i] == 'U')
+		{
+			print->uns = va_arg(print->ap, unsigned int);
+			print->nbr = ft_strlen(ft_itoa(print->uns));
+			ft_putnbr(ft_abs(print->uns));
+		}
 	}
-	return (str);
+	return (print->nbr);
 }

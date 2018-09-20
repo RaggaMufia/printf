@@ -1,56 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.h                                         :+:      :+:    :+:   */
+/*   ft_prin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 13:59:50 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/08 15:29:55 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/15 12:14:03 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/20 15:12:42 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#define FT_PRINTF_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 
-typedef struct		s_list
+typedef struct		s_printf
 {
 	va_list			ap;
 	int				n;
-	int				nb;
 	int				nbr;
-	char			spec;
+	char			c;
 	char			*str;
 	void			*ptr;
 	unsigned int	uns;
-}					t_list;
+}					t_printf;
 
-void				ft_putnbr(int nb);
+unsigned int		ft_abs(int n);
+int					ft_atoi(char *str);
+int					ft_printf(const char *format, ...);
+int					ft_print_char(const char *format);
+int					ft_check_specifier(const char *format);
+int					ft_print_str(const char *format);
+int					ft_print_decimal(const char *format);
+int					ft_print_int(const char *format);
+int					ft_print_hex(const char *format);
+int					ft_print_octal(const char *format);
+int					ft_print_unsigned(const char *format);
+int					ft_strlen(const char *str);
+int					ft_print_address(const char *format);
+char				*ft_strstr(const char *s1, const char *s2);
+char				*ft_strstr(const char *s1, const char *s2);
+char				*ft_itoa(int val);
+char				*ft_itoa_base(int val, int base);
 void				ft_putchar(char c);
 void				ft_putstr(char *str);
-int					ft_printf(const char *format, ...);
-int					ft_print_char(char c);
-int					ft_putchar_int(char c);
-int					ft_putstr_int(char *str);
-int					ft_print_str(char c);
-int					ft_numeric(char c);
-int					ft_unsigned(char c);
-int					ft_hex(char c);
-int					ft_hex_cap(char c);
-int					ft_conv_i(char c);
-int					ft_octal(char c);
-int					ft_strlen(char *str);
-int					ft_alternate(char c);
-int					ft_atoi_base(char *str, int base);
-int					flag_spec(char *str);
-char				*ft_itoa_base(int val, int base);
-char				*ft_itoa_base_cap(int val, int base);
-int					ft_print_addr(char c);
-char				*ft_strchr(const char *str, char c);
-char				*ft_print_memory(void *ptr);
-
+void				ft_putnbr(int nb);
 #endif

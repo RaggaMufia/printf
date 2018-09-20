@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/15 12:13:36 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/15 12:45:37 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/15 12:13:29 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/15 15:37:15 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoa_base(int val, int base)
+char		*ft_itoa(int nb)
 {
 	char	*str;
+	long	tmp;
 	int		len;
-	long	nb;
-	int		sign;
 
-	nb = (val < 0) ? -(long)val : val;
-	sign = (val <0 && base == 10) ? -1 : 0;
-	len = (sign == -1) ? 2 : 1;
-	while ((nb /= base))
-		len++;
+	tmp = nb;
+	len = (nb <= 0 ? 2 : 1);
+	while (nb && len++)
+		nb /= 10;
 	if (!(str = (char *)malloc(sizeof(char) * len)))
 		return (NULL);
-	while (len-- + sign)
+	str[len--] = '\0';
+	if (tmp < 0)
+		str[0] = (tmp < 0 ? '-' : '0');
+	while (tmp)
 	{
-		str[len] = (nb % base < 10) ? (nb % base + '0') : (nb % base + 'A' - 10);
-		nb /= base;
+		str[len] = (tmp < 0 ? -tmp : tmp) % 10 + '0';
+		tmp /= 10;
 	}
 	return (str);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 17:07:47 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/07 17:09:27 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/15 12:45:59 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/18 14:40:08 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putnbr(int nb)
 {
-	unsigned int nbr;
+	unsigned int	nbr;
 
 	if (nb < 0)
 	{
@@ -27,5 +27,5 @@ void	ft_putnbr(int nb)
 		ft_putnbr(nb % 10);
 	}
 	if (nb < 10)
-		ft_putchar(nb + 10);
+		ft_putchar(nb + '0');
 }

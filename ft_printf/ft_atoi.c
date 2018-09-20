@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_address.c                                 :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/20 13:13:01 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/20 15:18:43 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/20 13:18:49 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/20 13:20:57 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_print_address(const char *format)
+int		ft_atoi(char *str)
 {
-	t_printf	*print;
+	int		i;
+	int		res;
+	int		sign;
 
-	if (!(print = (t_printf *)malloc(sizeof(t_printf))))
-		return (0);
-	if (ft_strstr(format, "%p"))
+	i = 0;
+	res = 0;
+	sign = 1;
+	while (str[i] != '\0')
 	{
-		print->ptr = va_arg(print->ap, void *);
-		print->str = ft_itoa_base(ft_atoi(print->ptr), 16);
-		ft_putstr("0x77ffe");
-		ft_putstr(print->str);
-		print->nbr = ft_strlen(print->str);
+		if (str[i] == '\t' || str[i] == ' ' || str[i] == '\n')
+			i++;
+		else if (str[i] == '-')
+			sign = -1;
+		else
+			sign = 1;
+		res = (res * 10) + (str[i] - '0');
 	}
-	return (print->nbr);
+	return (res * sign);
 }

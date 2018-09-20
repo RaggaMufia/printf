@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_char.c                                    :+:      :+:    :+:   */
+/*   ft_print_chars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 14:00:13 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/09/08 13:20:04 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/09/15 12:17:33 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/09/18 14:53:24 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_print_char(char c)
+int     ft_print_char(const char *format)
 {
-	t_list	*lst;
+   t_printf     *print;
+   int          i;
 
-	lst = NULL;
-	c = lst->spec;
-	if (lst->spec == 'c' || lst->spec == 'C')
-		lst->n = va_arg(lst->ap, int);
-	lst->nbr = ft_putchar_int(lst->n);
-	return (lst->nbr);
+   i = 0;
+   print = (t_printf *)malloc(sizeof(t_printf));
+   while (format[i] == '%')
+   {
+       i++;
+       if (format[i] == 'c' || format[i] == 'C')
+       {
+           print->c = va_arg(print->ap, int);
+		   ft_putchar(print->c);
+       }
+   }
+   return (1);
 }
